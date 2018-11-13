@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server/index.js"
+    "dev": "cross-env NODE_ENV=development node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/wyqjs/react-ssr#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "koa": "^2.6.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
@@ -26,10 +27,22 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/register": "^7.0.0",
     "babel-loader": "^8.0.4",
+    "babel-plugin-add-module-exports": "^1.0.0",
     "babel-preset-react-app": "^6.1.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.1",
     "html-webpack-plugin": "^4.0.0-alpha.2",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.25.1",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-hot-middleware": "^2.24.3",
     "webpack-merge": "^4.1.4"
   },
   "babel": {

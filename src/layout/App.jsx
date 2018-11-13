@@ -1,16 +1,19 @@
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { Component, Fragment } from 'react'
+// import Header from '@/layout/header/index.jsx'
+// import Main from '@/layout/main/index.jsx'
+// import Footer from '@/layout/footer/index.jsx'
 
-const Home = () => <div>Home</div>;
-const Hello = () => <div>Hello</div>;
-
-const App = () => {
-  return (
-    <Router>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/hello" component={Hello} />
-    </Router>
-  )
+class App extends Component {
+  render() {
+    return (
+      <Fragment>
+        {/* <Header />
+        <Main />
+        <Footer /> */}
+        <div>sdfsdf</div>
+      </Fragment>
+    )
+  }
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'))
+export default App
