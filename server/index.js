@@ -7,6 +7,8 @@ const serverConfig = require('../config/webpack.server')
 const devMiddleware = require('./middleware/koa-webpack-dev-middleware')
 const hotMiddleware = require('./middleware/koa-webpack-hot-middleware')
 
+const clientRoute = require('./clientRoute')
+
 const configureDevelopment = app => {
 
   const compiler = webpack(clientConfig)
@@ -19,7 +21,9 @@ const configureDevelopment = app => {
 
 const app = new Koa()
 
-app.use(configureDevelopment)
+configureDevelopment(app)
+
+app.use(clientRoute)
 
 app.use(router.routes())
   .use(router.allowedMethods())

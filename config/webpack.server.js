@@ -12,3 +12,5 @@ const config = merge(baseWebpackConfig, {
     publicPath: "/dist/"  // 打包后输出路径以/dist/开头
   }
 })
+
+module.exports = config

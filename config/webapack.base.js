@@ -5,6 +5,9 @@ const paths = require('./paths')
 
 const isProd = process.env.NODE_ENV === "production"
 
+process.env.BABEL_ENV = 'development';
+process.env.NODE_ENV = 'development';
+
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor) => {
   const loaders = [
@@ -41,7 +44,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 }
 
 module.exports = {
-  mode: isProd,
+  mode: isProd ? 'production' : 'development',
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
@@ -52,8 +55,11 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: paths.appSrc,
-        loader: require.resolve('babel-loader')
+        // include: paths.appSrc,
+        loader: require.resolve('babel-loader'),
+        // options: [
+
+        // ]
       },
       {
         test: /\.scss$/,
