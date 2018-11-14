@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react'
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet"
+import { BrowserRouter as Router } from 'react-router-dom'
+
 // import Header from '@/layout/header/index.jsx'
 // import Main from '@/layout/main/index.jsx'
 // import Footer from '@/layout/footer/index.jsx'
 
-class App extends Component {
+class Root extends Component {
   constructor(props) {
     super(props)
 
@@ -28,4 +30,17 @@ class App extends Component {
   }
 }
 
-export default App
+let App;
+if (process.env.REACT_ENV === "server") {
+  // 服务端导出Root组件
+  App = Root;
+} else {
+  App = () => {
+    return (
+      <Router>
+        <Root />
+      </Router>
+    );
+  };
+}
+export default App;

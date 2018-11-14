@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styles from './index.scss'
 import { Link } from 'react-router-dom'
-import api from '@/api'
+// import api from '@/api'
 
 class Header extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class Header extends Component {
   }
 
   async componentDidMount() {
-    const res = await api.home.getCategories()
+    // const res = await api.home.getCategories()
     this.setState({
       categories: res.data
     })

@@ -2,6 +2,7 @@ const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webapack.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const getStyleLoaders = require('./style')
 
 
 const config = merge(baseWebpackConfig, {
