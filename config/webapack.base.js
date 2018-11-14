@@ -1,5 +1,4 @@
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const paths = require('./paths')
 
@@ -55,7 +54,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        // include: paths.appSrc,
+        include: paths.appSrc,
         loader: require.resolve('babel-loader'),
         // options: [
 
@@ -72,11 +71,5 @@ module.exports = {
         )
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml
-    })
-  ]
+  }
 }
