@@ -1,6 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
 const paths = require('./paths')
+const styleLoaders = require('./styleLoaders')
+
 
 const isProd = process.env.NODE_ENV === "production"
 
@@ -25,16 +27,7 @@ module.exports = {
 
         // ]
       },
-      {
-        test: /\.scss$/,
-        use: getStyleLoaders(
-          {
-            importLoaders: 2,
-            modules: true,
-          },
-          'sass-loader'
-        )
-      }
+      
     ]
   }
 }

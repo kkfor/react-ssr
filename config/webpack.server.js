@@ -4,6 +4,7 @@ const baseWebpackConfig = require('./webapack.base')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require('webpack')
 
+
 const config = merge(baseWebpackConfig, {
   entry: {
     app: './src/entry-server.js'
@@ -22,7 +23,26 @@ const config = merge(baseWebpackConfig, {
     new MiniCssExtractPlugin({
       filename: "static/css/[name].[contenthash].css"
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          },
+          'sass-loader'
+        ]
+      },
+    ]
+  }
 })
 
 module.exports = config

@@ -1,7 +1,11 @@
 // common function to get style loaders
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const getStyleLoaders = (cssOptions, preProcessor) => {
   const loaders = [
-    require.resolve('style-loader'),
+    {
+      loader: MiniCssExtractPlugin.loader,
+    },
+    // require.resolve('style-loader'),
     {
       loader: require.resolve('css-loader'),
       options: cssOptions,
@@ -33,4 +37,13 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
   return loaders
 }
 
-module.exports = getStyleLoaders
+module.exports = {
+  test: /\.scss$/,
+  use: getStyleLoaders(
+    {
+      importLoaders: 2,
+      modules: true,
+    },
+    'sass-loader'
+  )
+}

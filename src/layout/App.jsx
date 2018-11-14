@@ -2,9 +2,9 @@ import React, { Component, Fragment } from 'react'
 import { Helmet } from "react-helmet"
 import { BrowserRouter as Router } from 'react-router-dom'
 
-// import Header from '@/layout/header/index.jsx'
-// import Main from '@/layout/main/index.jsx'
-// import Footer from '@/layout/footer/index.jsx'
+import Header from '@/layout/header/index.jsx'
+import Main from '@/layout/main/index.jsx'
+import Footer from '@/layout/footer/index.jsx'
 
 class Root extends Component {
   constructor(props) {
@@ -21,9 +21,9 @@ class Root extends Component {
           <title>This is App page</title>
           <meta name="keywords" content="React SSR"></meta>
         </Helmet>
-        {/* <Header />
+        <Header />
         <Main />
-        <Footer /> */}
+        <Footer />
         <div>56151</div>
       </Fragment>
     )
