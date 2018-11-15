@@ -2,7 +2,7 @@ const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webapack.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const styleLoaders = require('./styleLoaders')
 
 const config = merge(baseWebpackConfig, {
   entry: {
@@ -21,19 +21,7 @@ const config = merge(baseWebpackConfig, {
   ],
   module: {
     rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true
-            }
-          },
-          'sass-loader'
-        ]
-      }, 
+      ...styleLoaders()
     ]
   }
 })

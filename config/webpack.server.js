@@ -1,9 +1,9 @@
 const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webapack.base')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require('webpack')
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const styleLoaders = require('./styleLoaders')
 
 const config = merge(baseWebpackConfig, {
   entry: {
@@ -26,21 +26,9 @@ const config = merge(baseWebpackConfig, {
   ],
   module: {
     rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true
-            }
-          },
-          'sass-loader'
-        ]
-      },
+      ...styleLoaders({
+        extract: true
+      })
     ]
   }
 })

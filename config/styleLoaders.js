@@ -1,49 +1,59 @@
 // common function to get style loaders
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const getStyleLoaders = (cssOptions, preProcessor) => {
-  const loaders = [
-    {
-      loader: MiniCssExtractPlugin.loader,
-    },
-    // require.resolve('style-loader'),
-    {
-      loader: require.resolve('css-loader'),
-      options: cssOptions,
-    },
-    // {
-    //   // Options for PostCSS as we reference these options twice
-    //   // Adds vendor prefixing based on your specified browser support in
-    //   // package.json
-    //   loader: require.resolve('postcss-loader'),
-    //   options: {
-    //     // Necessary for external CSS imports to work
-    //     // https://github.com/facebook/create-react-app/issues/2677
-    //     ident: 'postcss',
-    //     plugins: () => [
-    //       require('postcss-flexbugs-fixes'),
-    //       require('postcss-preset-env')({
-    //         autoprefixer: {
-    //           flexbox: 'no-2009'
-    //         },
-    //         stage: 3
-    //       })
-    //     ]
-    //   }
-    // }
-  ]
-  if (preProcessor) {
-    loaders.push(require.resolve(preProcessor))
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const path = require('path')
+
+const styleGlobalDir = path.resolve(__dirname, '../src/styles')
+const styleLoaders = (options, extension, preProcessor) => {
+  options = options || {}
+
+  const cssLoaders = (options, modules, preProcessor) => {
+    modules = modules || {}
+    const loaders = [
+      {
+        loader: require.resolve('css-loader'),
+        options: {
+          modules: modules.modules,
+          sourceMap: options.sourceMap
+        }
+      }
+    ]
+  
+    if (preProcessor) {
+      loaders.push(require.resolve(preProcessor))
+    }
+  
+    if (options.extract) {
+      return [MiniCssExtractPlugin.loader].concat(loaders)
+    } else {
+      return ['style-loader'].concat(loaders)
+    }
   }
-  return loaders
+
+  return [
+    {
+      test: new RegExp('\\.' + extension + '$'),
+      exclude: styleGlobalDir,
+      use: cssLoaders(options, {
+        modules: true
+      }, preProcessor)
+    },
+    {
+      test: new RegExp('\\.' + extension + '$'),
+      include: styleGlobalDir,
+      use: cssLoaders(options, preProcessor)
+    }
+  ]
 }
 
-module.exports = {
-  test: /\.scss$/,
-  use: getStyleLoaders(
-    {
-      importLoaders: 2,
-      modules: true,
-    },
-    'sass-loader'
-  )
+module.exports = (options) => {
+  const loaders = {
+    scss: 'sass'
+  }
+
+  let output = []
+  for (let extension in loaders) {
+    let loader = loaders[extension]
+    output = output.concat(styleLoaders(options, 'scss', loader + '-loader'))
+  }
+  return output
 }
