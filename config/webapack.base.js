@@ -1,13 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
 const paths = require('./paths')
-const styleLoaders = require('./styleLoaders')
-
 
 const isProd = process.env.NODE_ENV === "production"
-
-process.env.BABEL_ENV = 'development';
-process.env.NODE_ENV = 'development';
 
 module.exports = {
   mode: isProd ? 'production' : 'development',

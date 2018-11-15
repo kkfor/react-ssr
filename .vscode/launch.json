@@ -7,8 +7,19 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "启动程序",
-      "program": "${workspaceFolder}/server/index.js"
-    }
+      "name": "Launch via NPM",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run-script",
+        "dev"
+      ],
+      "port": 3001
+    },
+    // {
+    //   "type": "node",
+    //   "request": "launch",
+    //   "name": "启动程序",
+    //   "program": "${workspaceFolder}/server/index.js"
+    // }
   ]
 }

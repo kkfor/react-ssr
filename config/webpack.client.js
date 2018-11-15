@@ -21,7 +21,9 @@ const config = merge(baseWebpackConfig, {
   ],
   module: {
     rules: [
-      ...styleLoaders()
+      ...styleLoaders({
+        sourceMap: true
+      })
     ]
   }
 })
